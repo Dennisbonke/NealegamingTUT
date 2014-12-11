@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 public class DBItems extends Item{
 
     public DBItems(){
-        this.setCreativeTab(getCreativeTab().tabMaterials);
+        this.setCreativeTab(LetsModNG.letsmodngTab);
     }
 
     @SideOnly(Side.CLIENT)

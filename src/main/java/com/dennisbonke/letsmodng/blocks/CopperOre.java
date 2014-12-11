@@ -15,7 +15,7 @@ public class CopperOre extends Block{
         this.setHardness(3.0F);
         this.setResistance(5.0F);
         this.setStepSound(soundTypeStone);
-        this.setCreativeTab(getCreativeTabToDisplayOn().tabBlock);
+        this.setCreativeTab(LetsModNG.letsmodngTab);
     }
 
     @SideOnly(Side.CLIENT)

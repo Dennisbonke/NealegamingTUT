@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 @Mod(modid = LetsModNG.modid, version = LetsModNG.version)
@@ -18,6 +19,8 @@ public class LetsModNG {
     public static final String modid = "letsmodng";
     public static final String version = "Alpha v0.1";
 
+    public static CreativeTabs letsmodngTab;
+
     public static Item itemCopperIngot;
 
     public static Block oreCopperOre;
@@ -25,6 +28,12 @@ public class LetsModNG {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event){
 
+        letsmodngTab = new CreativeTabs("letsmodng") {
+            @Override
+            public Item getTabIconItem() {
+                return Item.getItemFromBlock(LetsModNG.oreCopperOre);
+            }
+        };
         itemCopperIngot = new DBItems().setUnlocalizedName("CopperIngot");
         GameRegistry.registerItem(itemCopperIngot, "CopperIngot");
 
