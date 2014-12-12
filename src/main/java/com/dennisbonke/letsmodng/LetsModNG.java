@@ -1,6 +1,7 @@
 package com.dennisbonke.letsmodng;
 
 import com.dennisbonke.letsmodng.blocks.*;
+import com.dennisbonke.letsmodng.handler.FuelHandler;
 import com.dennisbonke.letsmodng.items.DBItems;
 import com.dennisbonke.letsmodng.worldgen.LetsModNGWorldGen;
 import cpw.mods.fml.common.Mod;
@@ -31,16 +32,14 @@ public class LetsModNG {
     public static Item itemTinIngot;
     public static Item itemLeadIngot;
     public static Item itemSilverIngot;
-
+    public static Item itemCoalCoke;
     public static Item itemWoodenGear;
     public static Item itemStoneGear;
     public static Item itemIronGear;
-
     public static Block oreCopperOre;
     public static Block oreTinOre;
     public static Block oreLeadOre;
     public static Block oreSilverOre;
-
     public static Block blockCopperBlock;
     public static Block blockSilverBlock;
     public static Block blockTinBlock;
@@ -79,6 +78,7 @@ public class LetsModNG {
         itemWoodenGear = new DBItems().setUnlocalizedName("WoodenGear");
         itemStoneGear = new DBItems().setUnlocalizedName("StoneGear");
         itemIronGear = new DBItems().setUnlocalizedName("IronGear");
+        itemCoalCoke = new DBItems().setUnlocalizedName("CoalCoke");
 
         // Register Stuff
         // Ores
@@ -101,6 +101,7 @@ public class LetsModNG {
         GameRegistry.registerItem(itemWoodenGear, "WoodenGear");
         GameRegistry.registerItem(itemStoneGear, "StoneGear");
         GameRegistry.registerItem(itemIronGear, "IronGear");
+        GameRegistry.registerItem(itemCoalCoke, "CoalCoke");
 
         // Spawn
         GameRegistry.registerWorldGenerator(eventWorldGen, 0);
@@ -130,6 +131,8 @@ public class LetsModNG {
         GameRegistry.addSmelting(oreSilverOre, new ItemStack(itemSilverIngot), 0);
         GameRegistry.addSmelting(oreLeadOre, new ItemStack(itemLeadIngot), 0);
 
+        // FuelHandler
+        GameRegistry.registerFuelHandler(new FuelHandler());
     }
 
     @EventHandler
