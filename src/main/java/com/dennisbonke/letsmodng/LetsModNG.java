@@ -12,6 +12,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -30,6 +32,10 @@ public class LetsModNG {
     public static Item itemLeadIngot;
     public static Item itemSilverIngot;
 
+    public static Item itemWoodenGear;
+    public static Item itemStoneGear;
+    public static Item itemIronGear;
+
     public static Block oreCopperOre;
     public static Block oreTinOre;
     public static Block oreLeadOre;
@@ -43,6 +49,8 @@ public class LetsModNG {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event){
 
+        // Init Creativetab
+
         letsmodngTab = new CreativeTabs("letsmodng") {
             @Override
             public Item getTabIconItem() {
@@ -50,44 +58,49 @@ public class LetsModNG {
             }
         };
 
-        // Items
-        itemCopperIngot = new DBItems().setUnlocalizedName("CopperIngot");
-        GameRegistry.registerItem(itemCopperIngot, "CopperIngot");
-
-        itemTinIngot = new DBItems().setUnlocalizedName("TinIngot");
-        GameRegistry.registerItem(itemTinIngot, "TinIngot");
-
-        itemSilverIngot = new DBItems().setUnlocalizedName("SilverIngot");
-        GameRegistry.registerItem(itemSilverIngot, "SilverIngot");
-
-        itemLeadIngot = new DBItems().setUnlocalizedName("LeadIngot");
-        GameRegistry.registerItem(itemLeadIngot, "LeadIngot");
-
+        // Init stuff
         // Ores
         oreCopperOre = new OreBlock(Material.rock).setBlockName("CopperOre");
-        GameRegistry.registerBlock(oreCopperOre, "CopperOre");
-
         oreTinOre = new OreBlock(Material.rock).setBlockName("TinOre");
-        GameRegistry.registerBlock(oreTinOre, "TinOre");
-
         oreLeadOre = new OreBlock(Material.rock).setBlockName("LeadOre");
-        GameRegistry.registerBlock(oreLeadOre, "LeadOre");
-
         oreSilverOre = new OreBlock(Material.rock).setBlockName("SilverOre");
-        GameRegistry.registerBlock(oreSilverOre, "SilverOre");
 
         // Blocks
         blockCopperBlock = new CopperBlock(Material.iron).setBlockName("CopperBlock");
-        GameRegistry.registerBlock(blockCopperBlock, "CopperBlock");
-
         blockSilverBlock = new SilverBlock(Material.iron).setBlockName("SilverBlock");
-        GameRegistry.registerBlock(blockSilverBlock, "SilverBlock");
-
         blockTinBlock = new TinBlock(Material.iron).setBlockName("TinBlock");
-        GameRegistry.registerBlock(blockTinBlock, "TinBlock");
-
         blockLeadBlock = new LeadBlock(Material.iron).setBlockName("LeadBlock");
+
+        // Items
+        itemCopperIngot = new DBItems().setUnlocalizedName("CopperIngot");
+        itemTinIngot = new DBItems().setUnlocalizedName("TinIngot");
+        itemSilverIngot = new DBItems().setUnlocalizedName("SilverIngot");
+        itemLeadIngot = new DBItems().setUnlocalizedName("LeadIngot");
+        itemWoodenGear = new DBItems().setUnlocalizedName("WoodenGear");
+        itemStoneGear = new DBItems().setUnlocalizedName("StoneGear");
+        itemIronGear = new DBItems().setUnlocalizedName("IronGear");
+
+        // Register Stuff
+        // Ores
+        GameRegistry.registerBlock(oreCopperOre, "CopperOre");
+        GameRegistry.registerBlock(oreTinOre, "TinOre");
+        GameRegistry.registerBlock(oreLeadOre, "LeadOre");
+        GameRegistry.registerBlock(oreSilverOre, "SilverOre");
+
+        // Blocks
+        GameRegistry.registerBlock(blockCopperBlock, "CopperBlock");
+        GameRegistry.registerBlock(blockSilverBlock, "SilverBlock");
+        GameRegistry.registerBlock(blockTinBlock, "TinBlock");
         GameRegistry.registerBlock(blockLeadBlock, "LeadBlock");
+
+        // Items
+        GameRegistry.registerItem(itemCopperIngot, "CopperIngot");
+        GameRegistry.registerItem(itemTinIngot, "TinIngot");
+        GameRegistry.registerItem(itemSilverIngot, "SilverIngot");
+        GameRegistry.registerItem(itemLeadIngot, "LeadIngot");
+        GameRegistry.registerItem(itemWoodenGear, "WoodenGear");
+        GameRegistry.registerItem(itemStoneGear, "StoneGear");
+        GameRegistry.registerItem(itemIronGear, "IronGear");
 
         // Spawn
         GameRegistry.registerWorldGenerator(eventWorldGen, 0);
@@ -101,6 +114,14 @@ public class LetsModNG {
         GameRegistry.addRecipe(new ItemStack(blockTinBlock), new Object[]{"TTT", "TTT", "TTT", 'T', itemTinIngot});
         GameRegistry.addRecipe(new ItemStack(blockSilverBlock), new Object[]{"SSS", "SSS", "SSS", 'S', itemSilverIngot});
         GameRegistry.addRecipe(new ItemStack(blockLeadBlock), new Object[]{"LLL", "LLL", "LLL", 'L', itemLeadIngot});
+        GameRegistry.addRecipe(new ItemStack(itemWoodenGear), new Object[]{" W ", "W W", " W ", 'W', Items.stick});
+        GameRegistry.addRecipe(new ItemStack(itemStoneGear), new Object[]{" S ", "SWS", " S ", 'S', Blocks.cobblestone, 'W', itemWoodenGear});
+        GameRegistry.addRecipe(new ItemStack(itemIronGear), new Object[]{" I ", "ISI", " I ", 'I', Items.iron_ingot, 'S', itemStoneGear});
+        GameRegistry.addShapelessRecipe(new ItemStack(oreCopperOre), new Object[]{itemCopperIngot, Blocks.cobblestone});
+        GameRegistry.addShapelessRecipe(new ItemStack(itemCopperIngot, 9), new Object[]{blockCopperBlock});
+        GameRegistry.addShapelessRecipe(new ItemStack(itemLeadIngot, 9), new Object[]{blockLeadBlock});
+        GameRegistry.addShapelessRecipe(new ItemStack(itemSilverIngot, 9), new Object[]{blockSilverBlock});
+        GameRegistry.addShapelessRecipe(new ItemStack(itemTinIngot, 9), new Object[]{blockTinBlock});
 
 
         //Smelting

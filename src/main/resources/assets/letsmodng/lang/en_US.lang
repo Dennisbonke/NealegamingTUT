@@ -13,3 +13,6 @@ item.CopperIngot.name=Copper Ingot
 item.TinIngot.name=Tin Ingot
 item.SilverIngot.name=Silver Ingot
 item.LeadIngot.name=Lead Ingot
+item.WoodenGear.name=Wooden Gear
+item.StoneGear.name=Cobblestone Gear
+item.IronGear.name=Iron Gear
