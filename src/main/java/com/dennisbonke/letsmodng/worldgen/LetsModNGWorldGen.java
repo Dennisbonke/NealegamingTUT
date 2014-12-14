@@ -40,6 +40,7 @@ public class LetsModNGWorldGen implements IWorldGenerator{
         this.addOreSpawn(LetsModNG.oreTinOre, world, random, x, z, 16, 16, 4+random.nextInt(6), 25, 38, 100);
         this.addOreSpawn(LetsModNG.oreSilverOre, world, random, x, z, 16, 16, 4+random.nextInt(6), 25, 38, 100);
         this.addOreSpawn(LetsModNG.oreLeadOre, world, random, x, z, 16, 16, 4+random.nextInt(6), 25, 38, 100);
+        this.addOreSpawn(LetsModNG.oreTopazOre, world, random, x, z, 16, 16, 4+random.nextInt(6), 25, 38, 100);
     }
 
     private void addOreSpawn(Block block, World world, Random random, int blockXPos, int blockZPos, int maxX, int maxZ, int maxVeinSize, int chanceToSpawn, int minY, int maxY) {

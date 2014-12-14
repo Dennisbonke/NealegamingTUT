@@ -51,6 +51,7 @@ public class LetsModNG {
     public static Item itemIronHammer;
     public static Item itemIronPunch;
     public static Item itemTinCog;
+    public static Item itemTopaz;
 
     public static Block oreCopperOre;
     public static Block oreTinOre;
@@ -60,6 +61,7 @@ public class LetsModNG {
     public static Block blockSilverBlock;
     public static Block blockTinBlock;
     public static Block blockLeadBlock;
+    public static Block oreTopazOre;
 
     public static Item itemTopazSword;
     public static Item itemTopazAxe;
@@ -85,6 +87,7 @@ public class LetsModNG {
         oreTinOre = new OreBlock(Material.rock).setBlockName("TinOre");
         oreLeadOre = new OreBlock(Material.rock).setBlockName("LeadOre");
         oreSilverOre = new OreBlock(Material.rock).setBlockName("SilverOre");
+        oreTopazOre = new OreBlock(Material.rock).setBlockName("TopazOre");
 
         // Blocks
         blockCopperBlock = new CopperBlock(Material.iron).setBlockName("CopperBlock");
@@ -106,6 +109,7 @@ public class LetsModNG {
         itemIronHammer = new IronHammer().setUnlocalizedName("IronHammer");
         itemIronPunch = new IronPunch().setUnlocalizedName("IronPunch");
         itemTinCog = new DBItems().setUnlocalizedName("TinCog");
+        itemTopaz = new DBItems().setUnlocalizedName("Topaz");
         itemTopazSword = new TopazSword(TopazMaterial).setUnlocalizedName("TopazSword");
         itemTopazAxe = new TopazAxe(TopazMaterial).setUnlocalizedName("TopazAxe");
         itemTopazShovel = new TopazShovel(TopazMaterial).setUnlocalizedName("TopazShovel");
@@ -118,6 +122,7 @@ public class LetsModNG {
         GameRegistry.registerBlock(oreTinOre, "TinOre");
         GameRegistry.registerBlock(oreLeadOre, "LeadOre");
         GameRegistry.registerBlock(oreSilverOre, "SilverOre");
+        GameRegistry.registerBlock(oreTopazOre, "TopazOre");
 
         // Blocks
         GameRegistry.registerBlock(blockCopperBlock, "CopperBlock");
@@ -139,6 +144,7 @@ public class LetsModNG {
         GameRegistry.registerItem(itemIronDisc, "IronDisc");
         GameRegistry.registerItem(itemIronHammer, "IronHammer");
         GameRegistry.registerItem(itemIronPunch, "IronPunch");
+        GameRegistry.registerItem(itemTopaz, "Topaz");
         GameRegistry.registerItem(itemTopazAxe, "TopazAxe");
         GameRegistry.registerItem(itemTopazHoe, "TopazHoe");
         GameRegistry.registerItem(itemTopazShovel, "TopazShovel");
