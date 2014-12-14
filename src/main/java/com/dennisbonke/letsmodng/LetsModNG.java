@@ -3,9 +3,7 @@ package com.dennisbonke.letsmodng;
 import com.dennisbonke.letsmodng.blocks.*;
 import com.dennisbonke.letsmodng.handler.CraftingHandler;
 import com.dennisbonke.letsmodng.handler.FuelHandler;
-import com.dennisbonke.letsmodng.items.DBItems;
-import com.dennisbonke.letsmodng.items.IronHammer;
-import com.dennisbonke.letsmodng.items.IronPunch;
+import com.dennisbonke.letsmodng.items.*;
 import com.dennisbonke.letsmodng.worldgen.LetsModNGWorldGen;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -20,7 +18,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid = LetsModNG.modid, version = LetsModNG.version)
@@ -32,6 +32,11 @@ public class LetsModNG {
     LetsModNGWorldGen eventWorldGen = new LetsModNGWorldGen();
 
     public static CreativeTabs letsmodngTab;
+
+    public static ToolMaterial TopazMaterial = EnumHelper.addToolMaterial("TopazMaterial", 2, 750, 6.0F, 2.0F, 10);
+
+    @Mod.Instance(modid)
+    public static LetsModNG instance;
 
     public static Item itemCopperIngot;
     public static Item itemTinIngot;
@@ -55,6 +60,12 @@ public class LetsModNG {
     public static Block blockSilverBlock;
     public static Block blockTinBlock;
     public static Block blockLeadBlock;
+
+    public static Item itemTopazSword;
+    public static Item itemTopazAxe;
+    public static Item itemTopazHoe;
+    public static Item itemTopazShovel;
+    public static Item itemTopazPickaxe;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event){
@@ -95,6 +106,11 @@ public class LetsModNG {
         itemIronHammer = new IronHammer().setUnlocalizedName("IronHammer");
         itemIronPunch = new IronPunch().setUnlocalizedName("IronPunch");
         itemTinCog = new DBItems().setUnlocalizedName("TinCog");
+        itemTopazSword = new TopazSword(TopazMaterial).setUnlocalizedName("TopazSword");
+        itemTopazAxe = new TopazAxe(TopazMaterial).setUnlocalizedName("TopazAxe");
+        itemTopazShovel = new TopazShovel(TopazMaterial).setUnlocalizedName("TopazShovel");
+        itemTopazHoe = new TopazHoe(TopazMaterial).setUnlocalizedName("TopazHoe");
+        itemTopazPickaxe = new TopazPickaxe(TopazMaterial).setUnlocalizedName("TopazPickaxe");
 
         // Register Stuff
         // Ores
@@ -123,6 +139,11 @@ public class LetsModNG {
         GameRegistry.registerItem(itemIronDisc, "IronDisc");
         GameRegistry.registerItem(itemIronHammer, "IronHammer");
         GameRegistry.registerItem(itemIronPunch, "IronPunch");
+        GameRegistry.registerItem(itemTopazAxe, "TopazAxe");
+        GameRegistry.registerItem(itemTopazHoe, "TopazHoe");
+        GameRegistry.registerItem(itemTopazShovel, "TopazShovel");
+        GameRegistry.registerItem(itemTopazSword, "TopazSword");
+        GameRegistry.registerItem(itemTopazPickaxe, "TopazPickaxe");
 
         // Spawn
         GameRegistry.registerWorldGenerator(eventWorldGen, 0);
