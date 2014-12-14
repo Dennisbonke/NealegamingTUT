@@ -52,6 +52,8 @@ public class LetsModNG {
     public static Item itemTinCog;
     public static Item itemTopaz;
 
+    public static Item itemStaff;
+
     public static Block oreCopperOre;
     public static Block oreTinOre;
     public static Block oreLeadOre;
@@ -111,6 +113,7 @@ public class LetsModNG {
         itemIronHammer = new IronHammer().setUnlocalizedName("IronHammer");
         itemIronPunch = new IronPunch().setUnlocalizedName("IronPunch");
         itemTinCog = new DBItems().setUnlocalizedName("TinCog");
+        itemStaff = new DBItems().setUnlocalizedName("Staff");
         itemTopaz = new DBItems().setUnlocalizedName("Topaz");
         itemTopazSword = new TopazSword(TopazMaterial).setUnlocalizedName("TopazSword");
         itemTopazAxe = new TopazAxe(TopazMaterial).setUnlocalizedName("TopazAxe");
@@ -143,6 +146,7 @@ public class LetsModNG {
         GameRegistry.registerItem(itemIronGear, "IronGear");
         GameRegistry.registerItem(itemCoalCoke, "CoalCoke");
         GameRegistry.registerItem(itemTreePitch, "TreePitch");
+        GameRegistry.registerItem(itemStaff, "Staff");
         GameRegistry.registerItem(itemTinCog, "TinCog");
         GameRegistry.registerItem(itemIronWasher, "IronWasher");
         GameRegistry.registerItem(itemIronDisc, "IronDisc");
