@@ -1,9 +1,13 @@
 package com.dennisbonke.letsmodng;
 
 import com.dennisbonke.letsmodng.blocks.*;
+import com.dennisbonke.letsmodng.handler.CraftingHandler;
 import com.dennisbonke.letsmodng.handler.FuelHandler;
 import com.dennisbonke.letsmodng.items.DBItems;
+import com.dennisbonke.letsmodng.items.IronHammer;
+import com.dennisbonke.letsmodng.items.IronPunch;
 import com.dennisbonke.letsmodng.worldgen.LetsModNGWorldGen;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -17,6 +21,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid = LetsModNG.modid, version = LetsModNG.version)
 public class LetsModNG {
@@ -36,6 +41,12 @@ public class LetsModNG {
     public static Item itemWoodenGear;
     public static Item itemStoneGear;
     public static Item itemIronGear;
+    public static Item itemIronDisc;
+    public static Item itemIronWasher;
+    public static Item itemIronHammer;
+    public static Item itemIronPunch;
+    public static Item itemTinCog;
+
     public static Block oreCopperOre;
     public static Block oreTinOre;
     public static Block oreLeadOre;
@@ -79,6 +90,11 @@ public class LetsModNG {
         itemStoneGear = new DBItems().setUnlocalizedName("StoneGear");
         itemIronGear = new DBItems().setUnlocalizedName("IronGear");
         itemCoalCoke = new DBItems().setUnlocalizedName("CoalCoke");
+        itemIronWasher = new DBItems().setUnlocalizedName("IronWasher");
+        itemIronDisc = new DBItems().setUnlocalizedName("IronDisc");
+        itemIronHammer = new IronHammer().setUnlocalizedName("IronHammer");
+        itemIronPunch = new IronPunch().setUnlocalizedName("IronPunch");
+        itemTinCog = new DBItems().setUnlocalizedName("TinCog");
 
         // Register Stuff
         // Ores
@@ -102,6 +118,11 @@ public class LetsModNG {
         GameRegistry.registerItem(itemStoneGear, "StoneGear");
         GameRegistry.registerItem(itemIronGear, "IronGear");
         GameRegistry.registerItem(itemCoalCoke, "CoalCoke");
+        GameRegistry.registerItem(itemTinCog, "TinCog");
+        GameRegistry.registerItem(itemIronWasher, "IronWasher");
+        GameRegistry.registerItem(itemIronDisc, "IronDisc");
+        GameRegistry.registerItem(itemIronHammer, "IronHammer");
+        GameRegistry.registerItem(itemIronPunch, "IronPunch");
 
         // Spawn
         GameRegistry.registerWorldGenerator(eventWorldGen, 0);
@@ -110,19 +131,28 @@ public class LetsModNG {
     @EventHandler
     public void Init(FMLInitializationEvent event){
 
+        FMLCommonHandler.instance().bus().register(new CraftingHandler());
+
         //Recipes
         GameRegistry.addRecipe(new ItemStack(blockCopperBlock), new Object[]{"CCC", "CCC", "CCC", 'C', itemCopperIngot});
         GameRegistry.addRecipe(new ItemStack(blockTinBlock), new Object[]{"TTT", "TTT", "TTT", 'T', itemTinIngot});
         GameRegistry.addRecipe(new ItemStack(blockSilverBlock), new Object[]{"SSS", "SSS", "SSS", 'S', itemSilverIngot});
         GameRegistry.addRecipe(new ItemStack(blockLeadBlock), new Object[]{"LLL", "LLL", "LLL", 'L', itemLeadIngot});
+        GameRegistry.addRecipe(new ItemStack(itemIronHammer), new Object[]{"III", "ISI", " S ", 'I', Items.iron_ingot, 'S', Items.stick});
+        GameRegistry.addRecipe(new ItemStack(itemIronPunch), new Object[]{" I ", " C ", " S ", 'I', Items.iron_ingot, 'C', Blocks.cobblestone, 'S', Items.stick});
         GameRegistry.addRecipe(new ItemStack(itemWoodenGear), new Object[]{" W ", "W W", " W ", 'W', Items.stick});
         GameRegistry.addRecipe(new ItemStack(itemStoneGear), new Object[]{" S ", "SWS", " S ", 'S', Blocks.cobblestone, 'W', itemWoodenGear});
         GameRegistry.addRecipe(new ItemStack(itemIronGear), new Object[]{" I ", "ISI", " I ", 'I', Items.iron_ingot, 'S', itemStoneGear});
+        GameRegistry.addRecipe(new ItemStack(itemTinCog), new Object[]{" T ", "TIT", " T ", 'T', itemTinIngot, 'I', Items.iron_ingot});
         GameRegistry.addShapelessRecipe(new ItemStack(oreCopperOre), new Object[]{itemCopperIngot, Blocks.cobblestone});
         GameRegistry.addShapelessRecipe(new ItemStack(itemCopperIngot, 9), new Object[]{blockCopperBlock});
         GameRegistry.addShapelessRecipe(new ItemStack(itemLeadIngot, 9), new Object[]{blockLeadBlock});
         GameRegistry.addShapelessRecipe(new ItemStack(itemSilverIngot, 9), new Object[]{blockSilverBlock});
         GameRegistry.addShapelessRecipe(new ItemStack(itemTinIngot, 9), new Object[]{blockTinBlock});
+
+        GameRegistry.addRecipe(new ItemStack(itemIronDisc, 4), new Object[]{"IH", 'I', Items.iron_ingot, 'H', new ItemStack(itemIronHammer, 1, OreDictionary.WILDCARD_VALUE)});
+        GameRegistry.addRecipe(new ItemStack(itemIronWasher), new Object[]{"DP", 'D', itemIronDisc, 'P', new ItemStack(itemIronPunch, 1, OreDictionary.WILDCARD_VALUE)});
+
 
 
         //Smelting
