@@ -9,6 +9,7 @@ tile.CopperBlock.name=Copper Block
 tile.SilverBlock.name=Silver Block
 tile.LeadBlock.name=Lead Block
 tile.TinBlock.name=Tin Block
+tile.TopazBlock.name=Topaz Block
 
 item.CopperIngot.name=Copper Ingot
 item.TinIngot.name=Tin Ingot
@@ -18,6 +19,7 @@ item.WoodenGear.name=Wooden Gear
 item.StoneGear.name=Cobblestone Gear
 item.IronGear.name=Iron Gear
 item.CoalCoke.name=Coal Coke
+item.TreePitch.name=Tree Pitch
 item.TinCog.name=Tin Cog
 item.IronDisc.name=Iron Disc
 item.IronHammer.name=Iron Hammer

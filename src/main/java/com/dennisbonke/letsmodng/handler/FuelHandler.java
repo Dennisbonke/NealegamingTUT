@@ -10,6 +10,7 @@ public class FuelHandler implements IFuelHandler {
     public int getBurnTime(ItemStack fuel) {
 
         if(fuel.getItem() == LetsModNG.itemCoalCoke) return 3200;
+        if(fuel.getItem() == LetsModNG.itemTreePitch) return 200;
 
         return 0;
     }

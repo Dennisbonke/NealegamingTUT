@@ -7,14 +7,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 
-public class CopperOre extends Block{
-
-    public CopperOre(Material material) {
+public class TopazBlock extends Block {
+    public TopazBlock(Material material) {
         super(material);
 
         this.setHardness(3.0F);
         this.setResistance(5.0F);
-        this.setStepSound(soundTypeStone);
+        this.setStepSound(soundTypeMetal);
         this.setCreativeTab(LetsModNG.letsmodngTab);
     }
 
