@@ -71,6 +71,9 @@ public class LetsModNG {
     public static Item itemTopazShovel;
     public static Item itemTopazPickaxe;
 
+    public static Block blockAlabasterOvenIdle;
+    public static Block blockAlabasterOvenActive;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
 
@@ -121,6 +124,10 @@ public class LetsModNG {
         itemTopazHoe = new TopazHoe(TopazMaterial).setUnlocalizedName("TopazHoe");
         itemTopazPickaxe = new TopazPickaxe(TopazMaterial).setUnlocalizedName("TopazPickaxe");
 
+        // Machines
+        blockAlabasterOvenIdle = new AlabasterOven(false).setBlockName("AlabasterOvenIdle").setCreativeTab(LetsModNG.letsmodngTab);
+        blockAlabasterOvenActive = new AlabasterOven(true).setBlockName("AlabasterOvenActive").setLightLevel(0.625F);
+
         // Register Stuff
         // Ores
         GameRegistry.registerBlock(oreCopperOre, "CopperOre");
@@ -158,6 +165,10 @@ public class LetsModNG {
         GameRegistry.registerItem(itemTopazShovel, "TopazShovel");
         GameRegistry.registerItem(itemTopazSword, "TopazSword");
         GameRegistry.registerItem(itemTopazPickaxe, "TopazPickaxe");
+
+        // Machines
+        GameRegistry.registerBlock(blockAlabasterOvenIdle, "AlabasterOvenIdle");
+        GameRegistry.registerBlock(blockAlabasterOvenActive, "AlabasterOvenActive");
 
         // Spawn
         GameRegistry.registerWorldGenerator(eventWorldGen, 0);
