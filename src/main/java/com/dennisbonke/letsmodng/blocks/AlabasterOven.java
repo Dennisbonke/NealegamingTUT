@@ -1,6 +1,8 @@
 package com.dennisbonke.letsmodng.blocks;
 
 import com.dennisbonke.letsmodng.LetsModNG;
+import com.dennisbonke.letsmodng.tileentity.TileEntityAlabasterOven;
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -8,6 +10,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -40,7 +43,7 @@ public class AlabasterOven extends BlockContainer{
 
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int metadata){
-        return side == 3 ? this.iconFront : side == 1 ? this.iconTop : (side == 0 ? this.iconTop : (side != metadata ? this.blockIcon : this.blockIcon));
+        return side == 1 ? this.iconTop : (side == 0 ? this.iconTop : (side != metadata ? this.blockIcon : this.iconFront));
     }
 
     public Item getItemDropped(World world, int x, int y, int z){
@@ -78,12 +81,17 @@ public class AlabasterOven extends BlockContainer{
         }
     }
 
-    //TODO onBlockActivated
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
+        if(!world.isRemote){
+            FMLNetworkHandler.openGui(player, LetsModNG.instance, LetsModNG.guiIDAlabasterOven, world, x, y, z);
+        }
+        return true;
+    }
 
 
     @Override
-    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-        return null;
+    public TileEntity createNewTileEntity(World world, int i) {
+        return new TileEntityAlabasterOven();
     }
 
     //TODO randomDisplayTick
@@ -105,7 +113,7 @@ public class AlabasterOven extends BlockContainer{
         }
 
         if(itemstack.hasDisplayName()){
-            //TODO ((TileEntityAlabasterOven)world.getTileEntity(x, y, z)).setGuiDisplayName(itemstack.getDisplayName());
+            ((TileEntityAlabasterOven)world.getTileEntity(x, y, z)).setGuiDisplayName(itemstack.getDisplayName());
         }
     }
 

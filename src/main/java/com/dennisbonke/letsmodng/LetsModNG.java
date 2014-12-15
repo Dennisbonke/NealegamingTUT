@@ -3,13 +3,16 @@ package com.dennisbonke.letsmodng;
 import com.dennisbonke.letsmodng.blocks.*;
 import com.dennisbonke.letsmodng.handler.CraftingHandler;
 import com.dennisbonke.letsmodng.handler.FuelHandler;
+import com.dennisbonke.letsmodng.handler.GuiHandler;
 import com.dennisbonke.letsmodng.items.*;
+import com.dennisbonke.letsmodng.tileentity.TileEntityAlabasterOven;
 import com.dennisbonke.letsmodng.worldgen.LetsModNGWorldGen;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -73,6 +76,7 @@ public class LetsModNG {
 
     public static Block blockAlabasterOvenIdle;
     public static Block blockAlabasterOvenActive;
+    public static final int guiIDAlabasterOven = 0;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
@@ -178,6 +182,9 @@ public class LetsModNG {
     public void Init(FMLInitializationEvent event){
 
         FMLCommonHandler.instance().bus().register(new CraftingHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+
+        GameRegistry.registerTileEntity(TileEntityAlabasterOven.class, "AlabasterOven");
 
         //Recipes
         GameRegistry.addRecipe(new ItemStack(blockCopperBlock), new Object[]{"CCC", "CCC", "CCC", 'C', itemCopperIngot});
