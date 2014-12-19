@@ -1,5 +1,6 @@
 package com.dennisbonke.letsmodng.tileentity;
 
+import com.dennisbonke.letsmodng.blocks.AlabasterOven;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +21,7 @@ public class TileEntityAlabasterOven extends TileEntity implements ISidedInvento
     private static final int[] slots_side = new int[]{1};
     private ItemStack[] slots = new ItemStack[3];
 
-    public int furnaceSpeed;
+    public int furnaceSpeed = 150;
     /**
      * The number of ticks that the furnace will keep burning
      */
@@ -124,6 +125,47 @@ public class TileEntityAlabasterOven extends TileEntity implements ISidedInvento
 
     public void updateEntity(){
         boolean flag = this.burnTime > 0;
+        boolean flag1 = false;
+
+        if(this.isBurning()){
+            this.burnTime--;
+        }
+        if(!this.worldObj.isRemote){
+            if (this.burnTime == 0 && this.canSmelt()){
+                this.currentItemBurnTime = this.burnTime = getItemBurnTime(this.slots[1]);
+
+                if (this.isBurning()){
+                    flag1 = true;
+
+                    if (this.slots[1] != null){
+                        this.slots[1].stackSize--;
+
+                        if (this.slots[1].stackSize == 0){
+                            this.slots[1] = this.slots[1].getItem().getContainerItem(this.slots[1]);
+                        }
+                    }
+                }
+            }
+            if (this.isBurning() && this.canSmelt()){
+                this.cookTime++;
+
+                if (this.cookTime == this.furnaceSpeed){
+                    this.cookTime = 0;
+                    this.smeltItem();
+                    flag1 = true;
+                }
+            }else{
+                this.cookTime = 0;
+            }
+
+            if (flag != this.isBurning()){
+                flag1 = true;
+                AlabasterOven.updateAlabasterOvenBlockState(this.burnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+            }
+        }
+        if (flag1){
+            this.markDirty();
+        }
     }
 
     @Override
