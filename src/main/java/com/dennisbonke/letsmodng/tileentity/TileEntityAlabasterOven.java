@@ -11,6 +11,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityAlabasterOven extends TileEntity implements ISidedInventory {
@@ -254,5 +256,54 @@ public class TileEntityAlabasterOven extends TileEntity implements ISidedInvento
 
     public int getCookProgressScaled(int i){
         return this.cookTime * i / this.furnaceSpeed;
+    }
+
+    public void readFromNBT(NBTTagCompound nbt){
+        super.readFromNBT(nbt);
+
+        NBTTagList list = nbt.getTagList("Items", 10);
+        this.slots = new ItemStack[this.getSizeInventory()];
+
+        for (int i = 0; i < list.tagCount(); i++){
+            NBTTagCompound compound = (NBTTagCompound) list.getCompoundTagAt(i);
+            byte b = compound.getByte("Slot");
+
+            if (b >= 0 && b < this.slots.length){
+                this.slots[b] = ItemStack.loadItemStackFromNBT(compound);
+            }
+        }
+
+        this.burnTime = (int)nbt.getShort("BurnTime");
+        this.cookTime = (int)nbt.getShort("CookTime");
+        this.currentItemBurnTime = (int)nbt.getShort("CurrentBurnTime");
+
+        if (nbt.hasKey("CustomName")){
+            this.localizedName = nbt.getString("CustomName");
+        }
+    }
+
+    public void writeToNBT(NBTTagCompound nbt){
+        super.writeToNBT(nbt);
+
+        nbt.setShort("BurnTime", (short)this.burnTime);
+        nbt.setShort("CookTime", (short)this.cookTime);
+        nbt.setShort("CurrentBurnTime", (short)this.currentItemBurnTime);
+
+        NBTTagList list = new NBTTagList();
+
+        for (int i = 0; i < this.slots.length; i++){
+            if (this.slots[i] != null){
+                NBTTagCompound compound = new NBTTagCompound();
+                compound.setByte("Slot", (byte)i);
+                this.slots[i].writeToNBT(compound);
+                list.appendTag(compound);
+            }
+        }
+
+        nbt.setTag("Items", list);
+
+        if (this.hasCustomInventoryName()){
+            nbt.setString("CustomName", this.localizedName);
+        }
     }
 }
