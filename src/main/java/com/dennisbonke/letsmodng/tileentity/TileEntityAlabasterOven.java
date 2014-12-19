@@ -10,6 +10,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityAlabasterOven extends TileEntity implements ISidedInventory {
@@ -49,7 +50,7 @@ public class TileEntityAlabasterOven extends TileEntity implements ISidedInvento
 
     @Override
     public int getInventoryStackLimit() {
-        return 0;
+        return 64;
     }
 
     @Override
@@ -123,6 +124,10 @@ public class TileEntityAlabasterOven extends TileEntity implements ISidedInvento
         return 0;
     }
 
+    public boolean isBurning(){
+        return this.burnTime > 0;
+    }
+
     public void updateEntity(){
         boolean flag = this.burnTime > 0;
         boolean flag1 = false;
@@ -165,6 +170,40 @@ public class TileEntityAlabasterOven extends TileEntity implements ISidedInvento
         }
         if (flag1){
             this.markDirty();
+        }
+    }
+
+    public boolean canSmelt() {
+        if (this.slots[0] == null) {
+            return false;
+        } else {
+            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.slots[0]);
+
+            if (itemstack == null) return false;
+            if (this.slots[2] == null) return true;
+            if (!this.slots[2].isItemEqual(itemstack)) return false;
+
+            int result = this.slots[2].stackSize + itemstack.stackSize;
+
+            return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
+        }
+    }
+
+    public void smeltItem() {
+        if (this.canSmelt()) {
+            ItemStack itemstack = FurnaceRecipes.smelting().getSmeltingResult(this.slots[0]);
+
+            if (this.slots[2] == null) {
+                this.slots[2] = itemstack.copy();
+            } else if (this.slots[2].isItemEqual(itemstack)) {
+                this.slots[2].stackSize += itemstack.stackSize;
+            }
+
+            this.slots[0].stackSize--;
+
+            if (this.slots[0].stackSize <= 0) {
+                this.slots[0] = null;
+            }
         }
     }
 

@@ -28,6 +28,8 @@ public class AlabasterOven extends BlockContainer{
     @SideOnly(Side.CLIENT)
     private IIcon iconTop;
 
+    private static boolean keepInventory;
+
     public AlabasterOven(boolean isActive){
         super(Material.iron);
 
@@ -117,4 +119,25 @@ public class AlabasterOven extends BlockContainer{
         }
     }
 
+    public static void updateAlabasterOvenBlockState(boolean active, World worldObj, int xCoord, int yCoord, int zCoord) {
+        int i = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+
+        TileEntity tileentity = worldObj.getTileEntity(xCoord, yCoord, zCoord);
+        keepInventory = true;
+
+        if (active){
+            worldObj.setBlock(xCoord, yCoord, zCoord, LetsModNG.blockAlabasterOvenActive);
+        }else{
+            worldObj.setBlock(xCoord, yCoord, zCoord, LetsModNG.blockAlabasterOvenIdle);
+        }
+
+        keepInventory = false;
+
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, i, 2);
+
+        if (tileentity != null){
+            tileentity.validate();
+            worldObj.setTileEntity(xCoord, yCoord, zCoord, tileentity);
+        }
+    }
 }
