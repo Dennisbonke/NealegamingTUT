@@ -27,7 +27,7 @@ public class GuiAlabasterOven extends GuiContainer{
 
 
     public void drawGuiContainerForegroundLayer(int par1, int par2){
-        String name = this.alabasterOven.hasCustomInventoryName() ? this.alabasterOven.getInventoryName() : I18n.format(this.alabasterOven.getInventoryName(), new Object[0]);
+        String name = "Alabaster Oven";
 
         this.fontRendererObj.drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 2, 6, 4210752);
         this.fontRendererObj.drawString(I18n.format("Container.inventory", new Object[0]), 118, this.ySize - 96 + 2, 4210752);
@@ -40,5 +40,13 @@ public class GuiAlabasterOven extends GuiContainer{
         Minecraft.getMinecraft().getTextureManager().bindTexture(bground);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
+        if (this.alabasterOven.isBurning()){
+            int k = this.alabasterOven.getBurnTimeRemainingScaled(40);
+            int j = 40 - k;
+            drawTexturedModalRect(guiLeft + 29, guiTop + 65, 176, 0, 40 - j, 10);
+        }
+
+        int k = this.alabasterOven.getCookProgressScaled(24);
+        drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 10, k + 1, 16);
     }
 }

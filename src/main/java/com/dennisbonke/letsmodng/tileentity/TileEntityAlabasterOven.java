@@ -130,22 +130,21 @@ public class TileEntityAlabasterOven extends TileEntity implements ISidedInvento
             if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.air) {
                 Block block = Block.getBlockFromItem(item);
 
+                    if (block == Blocks.sapling) return 100;
+                    if (block == Blocks.coal_block) return 14400;
+                    if (block == Blocks.log) return 400;
+                    if (block == Blocks.log2) return 400;
+                    if (block == Blocks.planks) return 300;
+                    if (block == Blocks.wooden_button) return 100;
+
+                }
+
                 if (item == Items.coal) return 1600;
                 if (item == Items.stick) return 100;
                 if (item == Items.lava_bucket) return 20000;
-                if (block == Blocks.sapling) return 100;
-                if (block == Blocks.coal_block) return 14400;
-                if (block == Blocks.log) return 400;
-                if (block == Blocks.log2) return 400;
-                if (block == Blocks.planks) return 300;
-                if (block == Blocks.wooden_button) return 100;
                 if (item == Items.blaze_rod) return 2400;
-
-                return GameRegistry.getFuelValue(itemstack);
-
             }
-        }
-        return 0;
+        return GameRegistry.getFuelValue(itemstack);
     }
 
     public boolean isBurning(){
