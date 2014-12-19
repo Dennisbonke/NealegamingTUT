@@ -1,6 +1,7 @@
 package com.dennisbonke.letsmodng.gui;
 
 import com.dennisbonke.letsmodng.LetsModNG;
+import com.dennisbonke.letsmodng.container.ContainerAlabasterOven;
 import com.dennisbonke.letsmodng.tileentity.TileEntityAlabasterOven;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -14,7 +15,7 @@ public class GuiAlabasterOven extends GuiContainer{
     public TileEntityAlabasterOven alabasterOven;
 
     public GuiAlabasterOven(InventoryPlayer inventoryPlayer, TileEntityAlabasterOven entity) {
-        super(ContainerAlabasterOven(inventoryPlayer, entity));
+        super(new ContainerAlabasterOven(inventoryPlayer, entity));
 
         this.alabasterOven = entity;
 
