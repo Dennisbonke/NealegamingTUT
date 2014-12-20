@@ -2,7 +2,9 @@ package com.dennisbonke.letsmodng;
 
 import com.dennisbonke.letsmodng.blocks.*;
 import com.dennisbonke.letsmodng.crafting.RecipeRemover;
+import com.dennisbonke.letsmodng.entity.EntityCyclops;
 import com.dennisbonke.letsmodng.handler.CraftingHandler;
+import com.dennisbonke.letsmodng.handler.EntityHandler;
 import com.dennisbonke.letsmodng.handler.FuelHandler;
 import com.dennisbonke.letsmodng.handler.GuiHandler;
 import com.dennisbonke.letsmodng.items.*;
@@ -219,6 +221,10 @@ public class LetsModNG {
         FMLCommonHandler.instance().bus().register(new CraftingHandler());
         //GUIHandler
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+        //FuelHandler
+        GameRegistry.registerFuelHandler(new FuelHandler());
+        //Entities
+        EntityHandler.registerEntities(EntityCyclops.class, "Cyclops");
         //TileEntities
         GameRegistry.registerTileEntity(TileEntityAlabasterOven.class, "AlabasterOven");
         //Recipes
@@ -244,6 +250,8 @@ public class LetsModNG {
         GameRegistry.addRecipe(new ItemStack(Items.book), new Object[]{"LLL", "PPP", "LLL", 'L', Items.leather, 'P', Items.paper});
         GameRegistry.addRecipe(new ItemStack(Blocks.furnace), new Object[]{"SSS", "S S", "SSS", 'S', Blocks.stone});
         GameRegistry.addRecipe(new ItemStack(Items.stick, 6), new Object[]{"X", "X", "X", 'X', Blocks.planks});
+        //NiceStuff
+        GameRegistry.addRecipe(new ItemStack(blockObsidianTable), new Object[]{"IOI", "OOO", "IOI", 'I', Blocks.iron_block, 'O', Blocks.obsidian});
         //Shapeless
         //Test
         GameRegistry.addShapelessRecipe(new ItemStack(oreCopperOre), new Object[]{itemCopperIngot, Blocks.cobblestone});
@@ -272,8 +280,6 @@ public class LetsModNG {
         GameRegistry.addSmelting(oreTinOre, new ItemStack(itemTinIngot), 0);
         GameRegistry.addSmelting(oreSilverOre, new ItemStack(itemSilverIngot), 0);
         GameRegistry.addSmelting(oreLeadOre, new ItemStack(itemLeadIngot), 0);
-        //FuelHandler
-        GameRegistry.registerFuelHandler(new FuelHandler());
     }
 
     @Mod.EventHandler
