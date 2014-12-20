@@ -209,6 +209,7 @@ public class LetsModNG {
         GameRegistry.addRecipe(new ItemStack(itemTopazPickaxe), new Object[]{"TTT", " S ", " S ", 'T', itemTopaz, 'S', Items.stick});
         GameRegistry.addRecipe(new ItemStack(itemTopazShovel), new Object[]{" T ", " S ", " S ", 'T', itemTopaz, 'S', Items.stick});
         GameRegistry.addRecipe(new ItemStack(itemTopazSword), new Object[]{" T ", " T ", " S ", 'T', itemTopaz, 'S', Items.stick});
+        GameRegistry.addRecipe(new ItemStack(blockAlabasterOvenIdle), new Object[]{"STS", "TFT", "STS", 'S', Blocks.stone, 'T', itemTinIngot, 'F', Blocks.furnace});
 
         GameRegistry.addRecipe(new ItemStack(itemIronDisc, 4), new Object[]{"IH", 'I', Items.iron_ingot, 'H', new ItemStack(itemIronHammer, 1, OreDictionary.WILDCARD_VALUE)});
         GameRegistry.addRecipe(new ItemStack(itemIronWasher), new Object[]{"DP", 'D', itemIronDisc, 'P', new ItemStack(itemIronPunch, 1, OreDictionary.WILDCARD_VALUE)});
