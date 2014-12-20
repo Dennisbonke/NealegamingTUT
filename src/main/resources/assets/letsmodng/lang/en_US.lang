@@ -10,6 +10,7 @@ tile.SilverBlock.name=Silver Block
 tile.LeadBlock.name=Lead Block
 tile.TinBlock.name=Tin Block
 tile.TopazBlock.name=Topaz Block
+tile.ObsidianTable.name=Obsidian Table
 tile.AlabasterOvenIdle.name=Alabaster Oven
 tile.AlabasterOvenActive.name=Alabaster Oven
 

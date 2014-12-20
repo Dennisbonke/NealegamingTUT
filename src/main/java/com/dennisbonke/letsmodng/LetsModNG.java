@@ -5,10 +5,12 @@ import com.dennisbonke.letsmodng.handler.CraftingHandler;
 import com.dennisbonke.letsmodng.handler.FuelHandler;
 import com.dennisbonke.letsmodng.handler.GuiHandler;
 import com.dennisbonke.letsmodng.items.*;
+import com.dennisbonke.letsmodng.proxy.CommonProxy;
 import com.dennisbonke.letsmodng.tileentity.TileEntityAlabasterOven;
 import com.dennisbonke.letsmodng.worldgen.LetsModNGWorldGen;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -67,6 +69,7 @@ public class LetsModNG {
     public static Block blockLeadBlock;
     public static Block blockTopazBlock;
     public static Block oreTopazOre;
+    public static Block blockObsidianTable;
 
     public static Item itemTopazSword;
     public static Item itemTopazAxe;
@@ -77,6 +80,9 @@ public class LetsModNG {
     public static Block blockAlabasterOvenIdle;
     public static Block blockAlabasterOvenActive;
     public static final int guiIDAlabasterOven = 0;
+
+    @SidedProxy(clientSide = "com.dennisbonke.letsmodng.proxy.ClientProxy", serverSide = "com.dennisbonke.letsmodng.proxy.CommonProxy")
+    public static CommonProxy dennisProxy;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
@@ -104,6 +110,7 @@ public class LetsModNG {
         blockTinBlock = new TinBlock(Material.iron).setBlockName("TinBlock");
         blockLeadBlock = new LeadBlock(Material.iron).setBlockName("LeadBlock");
         blockTopazBlock = new TopazBlock(Material.iron).setBlockName("TopazBlock");
+        blockObsidianTable = new ObsidianTable(Material.rock).setBlockName("ObsidianTable");
 
         // Items
         itemCopperIngot = new DBItems().setUnlocalizedName("CopperIngot");
@@ -146,6 +153,7 @@ public class LetsModNG {
         GameRegistry.registerBlock(blockTinBlock, "TinBlock");
         GameRegistry.registerBlock(blockLeadBlock, "LeadBlock");
         GameRegistry.registerBlock(blockTopazBlock, "TopazBlock");
+        GameRegistry.registerBlock(blockObsidianTable, "ObsidianTable");
 
         // Items
         GameRegistry.registerItem(itemCopperIngot, "CopperIngot");
@@ -176,6 +184,10 @@ public class LetsModNG {
 
         // Spawn
         GameRegistry.registerWorldGenerator(eventWorldGen, 0);
+
+        //Renderers
+        dennisProxy.registerRenderThings();
+
     }
 
     @Mod.EventHandler
