@@ -224,7 +224,7 @@ public class LetsModNG {
         //FuelHandler
         GameRegistry.registerFuelHandler(new FuelHandler());
         //Entities
-        EntityHandler.registerEntities(EntityCyclops.class, "Cyclops");
+        EntityHandler.registerMonsters(EntityCyclops.class, "Cyclops");
         //TileEntities
         GameRegistry.registerTileEntity(TileEntityAlabasterOven.class, "AlabasterOven");
         //Recipes
